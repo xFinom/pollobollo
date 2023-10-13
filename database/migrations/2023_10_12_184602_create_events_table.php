@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('show_id')->constrained();
+            $table->foreignId('client_id')->constrained();
+            $table->date('date');
+            $table->time('time');
+            $table->integer('duration');
+            $table->string('address');
         });
     }
 

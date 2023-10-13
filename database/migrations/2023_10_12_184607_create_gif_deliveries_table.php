@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('gif_deliveries', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('botarga_id')->constrained();
+            $table->foreignId('client_id')->constrained();
+            $table->double('price');
+            $table->date('date');
+            $table->time('time');
+            $table->boolean('courtesyGift');
         });
     }
 
