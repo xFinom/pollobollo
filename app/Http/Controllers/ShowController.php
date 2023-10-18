@@ -13,7 +13,7 @@ class ShowController extends Controller
      */
     public function index()
     {
-        // Regresar vista
+        return view('admin_panel.showAllShows', ['shows' => Show::all()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class ShowController extends Controller
      */
     public function create()
     {
-        // regresar vista
+        return view('admin_panel.createShow');
     }
 
     /**
@@ -61,7 +61,7 @@ class ShowController extends Controller
      */
     public function edit(Show $show)
     {
-
+        return view('admin_panel.editShow', ['show' => Show::find($show->id)]);
     }
 
     /**

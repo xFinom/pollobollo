@@ -31,7 +31,7 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'phone' => 'required|max:15',
+            'phone' => 'required    ',
             'email' => 'required|email',
         ]);
 
@@ -58,7 +58,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('admin_panel.editClient', ['client' => Client::find($client->id)]);
     }
 
     /**
@@ -69,8 +69,7 @@ class ClientController extends Controller
         $request->validate([
             'name' => 'required',
             'address' => 'required',
-            'duration' => 'required',
-            'phone' => 'required|max:15',
+            'phone' => 'required',
             'email' => 'required|email',
         ]);
 
@@ -91,6 +90,6 @@ class ClientController extends Controller
     {
         $client->delete();
 
-        return redirect()->route('show.index');
+        return redirect()->route('client.index');
     }
 }

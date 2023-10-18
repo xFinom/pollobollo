@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Botarga;
-use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BotargaController extends Controller
 {
@@ -13,7 +13,7 @@ class BotargaController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.showAllBotargas', ['botargas' => Botarga::all()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class BotargaController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin_panel.createBotarga')    ;
     }
 
     /**
@@ -32,14 +32,16 @@ class BotargaController extends Controller
         $request->validate([
             'name' => 'required',
             'stock' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $botarga = new Botarga();
 
         $botarga->name = $request->name;
         $botarga->stock = $request->stock;
-        $botarga->image = $request->image;
+
+        $path = $request->file('image')->store('botarga', 'public');
+        $botarga->image = $path;
 
         $botarga->save();
 
@@ -59,7 +61,7 @@ class BotargaController extends Controller
      */
     public function edit(Botarga $botarga)
     {
-
+        return view('admin_panel.editBotarga', ['botarga' => Botarga::find($botarga->id)]);
     }
 
     /**
@@ -70,12 +72,16 @@ class BotargaController extends Controller
         $request->validate([
             'name' => 'required',
             'stock' => 'required',
-            'image' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $botarga->name = $request->name;
         $botarga->stock = $request->stock;
-        $botarga->image = $request->image;
+
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('botarga', 'public');
+            $botarga->image = $path;
+        }
 
         $botarga->save();
 
