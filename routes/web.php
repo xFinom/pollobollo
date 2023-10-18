@@ -1,12 +1,13 @@
 <?php
 
+use App\Http\Controllers\BotargaController;
+use App\Http\Controllers\EventsController;
+use App\Http\Controllers\GifDeliveriesController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Client;
-use App\Models\Rentals;
-use App\Models\Show;
-use App\Models\Botarga;
-use App\Models\GifDeliveries;
-use App\Models\Events;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\RentalsController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::resource('client', Client::class);
-Route::resource('rentals', Rentals::class);
-Route::resource('show', Show::class);
-Route::resource('botarga', Botarga::class);
-Route::resource('gift_deliveries', GifDeliveries::class);
-Route::resource('events', Events::class);
+Route::resource('client', ClientController::class);
+Route::resource('rentals', RentalsController::class);
+Route::resource('show', ShowController::class);
+Route::resource('botarga', BotargaController::class);
+Route::resource('gift_deliveries', GifDeliveriesController::class);
+Route::resource('events', EventsController::class);
+
