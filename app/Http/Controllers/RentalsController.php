@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rentals;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class RentalsController extends Controller
@@ -28,7 +29,35 @@ class RentalsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'botarga_id' => 'required',
+            'price' => 'required',
+            'returnDate' => 'required|date',
+            'duration' => 'required',
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required|max:15',
+            'email' => 'required|email',
+        ]);
+
+        $client = Client::create([
+            'name' => $request->name,
+            'address' => $request->address,
+            'phone' => $request->address,
+            'email' => $request->email,
+        ]);
+
+        $rentals = new Rentals();
+
+        $rentals->botarga_id = $request->botarga_id;
+        $rentals->cliente_id = $client->id;
+        $rentals->price = $request->price;
+        $rentals->returnDate = $request->returnDate;
+        $rentals->duration = $request->duration;
+
+        $rentals->save();
+
+        return redirect()->route('rentals.index');
     }
 
     /**
@@ -52,7 +81,21 @@ class RentalsController extends Controller
      */
     public function update(Request $request, Rentals $rentals)
     {
-        //
+        $request->validate([
+            'botarga_id' => 'required',
+            'price' => 'required',
+            'returnDate' => 'required|date',
+            'duration' => 'required'
+        ]);
+
+        $rentals->botarga_id = $request->botarga_id;
+        $rentals->price = $request->price;
+        $rentals->returnDate = $request->returnDate;
+        $rentals->duration = $request->duration;
+
+        $rentals->save();
+
+        return redirect()->route('rentals.index');
     }
 
     /**
@@ -60,6 +103,8 @@ class RentalsController extends Controller
      */
     public function destroy(Rentals $rentals)
     {
-        //
+        $rentals->delete();
+
+        return redirect()->route('rentals.index');
     }
 }

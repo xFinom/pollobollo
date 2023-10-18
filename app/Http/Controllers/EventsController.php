@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Events;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,37 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'show_id' => 'required',
+            'date' => 'required|date',
+            'time' => 'required',
+            'duration' => 'required',
+            'address' => 'required',
+            'name' => 'required',
+            'address_client' => 'required',
+            'phone' => 'required|max:15',
+            'email' => 'required|email',
+        ]);
+
+        $client = Client::create([
+            'name' => $request->name,
+            'address' => $request->address_client,
+            'phone' => $request->address,
+            'email' => $request->email,
+        ]);
+
+        $events = new Events();
+
+        $events->show_id = $request->show_id;
+        $events->cliente_id = $client->id;
+        $events->date = $request->date;
+        $events->time = $request->time;
+        $events->duration = $request->duration;
+        $events->address = $request->address;
+
+        $events->save();
+
+        return redirect()->route('rentals.index');
     }
 
     /**
@@ -52,7 +83,23 @@ class EventsController extends Controller
      */
     public function update(Request $request, Events $events)
     {
-        //
+        $request->validate([
+            'show_id' => 'required',
+            'date' => 'required|date',
+            'time' => 'required',
+            'duration' => 'required',
+            'address' => 'required',
+        ]);
+
+        $events->show_id = $request->show_id;
+        $events->date = $request->date;
+        $events->time = $request->time;
+        $events->duration = $request->duration;
+        $events->address = $request->address;
+
+        $events->save();
+
+        return redirect()->route('rentals.index');
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Show;
 use Illuminate\Http\Request;
+use App\Models\Events;
 
 class ShowController extends Controller
 {
@@ -12,7 +13,7 @@ class ShowController extends Controller
      */
     public function index()
     {
-        //
+        // Regresar vista
     }
 
     /**
@@ -20,7 +21,7 @@ class ShowController extends Controller
      */
     public function create()
     {
-        //
+        // regresar vista
     }
 
     /**
@@ -28,7 +29,23 @@ class ShowController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'duration' => 'required',
+            'price' => 'required',
+        ]);
+
+        $show = new Show();
+
+        $show->name = $request->name;
+        $show->description = $request->description;
+        $show->duration = $request->duration;
+        $show->price = $request->price;
+
+        $show->save();
+
+        return redirect()->route('show.index');
     }
 
     /**
@@ -44,7 +61,7 @@ class ShowController extends Controller
      */
     public function edit(Show $show)
     {
-        //
+
     }
 
     /**
@@ -52,7 +69,21 @@ class ShowController extends Controller
      */
     public function update(Request $request, Show $show)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'duration' => 'required',
+            'price' => 'required',
+        ]);
+
+        $show->name = $request->name;
+        $show->description = $request->description;
+        $show->duration = $request->duration;
+        $show->price = $request->price;
+
+        $show->save();
+
+        return redirect()->route('show.index');
     }
 
     /**
@@ -60,6 +91,8 @@ class ShowController extends Controller
      */
     public function destroy(Show $show)
     {
-        //
+        $show->delete();
+
+        return redirect()->route('show.index');
     }
 }

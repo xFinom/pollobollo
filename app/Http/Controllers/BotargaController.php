@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Botarga;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class BotargaController extends Controller
@@ -28,7 +29,21 @@ class BotargaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required',
+            'image' => 'required',
+        ]);
+
+        $botarga = new Botarga();
+
+        $botarga->name = $request->name;
+        $botarga->stock = $request->stock;
+        $botarga->image = $request->image;
+
+        $botarga->save();
+
+        return redirect()->route('botarga.index');
     }
 
     /**
@@ -44,7 +59,7 @@ class BotargaController extends Controller
      */
     public function edit(Botarga $botarga)
     {
-        //
+
     }
 
     /**
@@ -52,7 +67,19 @@ class BotargaController extends Controller
      */
     public function update(Request $request, Botarga $botarga)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'stock' => 'required',
+            'image' => 'required',
+        ]);
+
+        $botarga->name = $request->name;
+        $botarga->stock = $request->stock;
+        $botarga->image = $request->image;
+
+        $botarga->save();
+
+        return redirect()->route('botarga.index');
     }
 
     /**
@@ -60,6 +87,8 @@ class BotargaController extends Controller
      */
     public function destroy(Botarga $botarga)
     {
-        //
+        $botarga->delete();
+
+        return redirect()->route('botarga.index');
     }
 }

@@ -12,7 +12,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.showAllClients', ['clients' => Client::all()]);
     }
 
     /**
@@ -28,7 +28,21 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required|max:15',
+            'email' => 'required|email',
+        ]);
+
+        $client = new Client();
+
+        $client->name = $request->name;
+        $client->address = $request->address;
+        $client->phone = $request->phone;
+        $client->email = $request->email;
+
+        $client->save();
     }
 
     /**
@@ -52,7 +66,22 @@ class ClientController extends Controller
      */
     public function update(Request $request, Client $client)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'duration' => 'required',
+            'phone' => 'required|max:15',
+            'email' => 'required|email',
+        ]);
+
+        $client->name = $request->name;
+        $client->address = $request->address;
+        $client->phone = $request->phone;
+        $client->email = $request->email;
+
+        $client->save();
+
+        return redirect()->route('client.index');
     }
 
     /**
@@ -60,6 +89,8 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        return redirect()->route('show.index');
     }
 }
