@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Events;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Event;
 
 class EventsController extends Controller
 {
@@ -13,7 +14,7 @@ class EventsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.showAllEvents', ['events' => Events::with(['client:id,name', 'show:id,name'])->get()]);
     }
 
     /**

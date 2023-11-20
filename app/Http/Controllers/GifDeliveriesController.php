@@ -14,7 +14,7 @@ class GifDeliveriesController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.showAllGiftDeliveries', ['deliveries' => GifDeliveries::with(['client:id,name', 'botarga:id,name'])->get()]);
     }
 
     /**

@@ -31,7 +31,7 @@
                             {{$show->duration . ' horas'}}
                         </td>
                         <td class="px-4 py-3 text-xs">
-                            {{$show->price}}
+                            {{$show->price . ' MXN'}}
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">

@@ -4,6 +4,7 @@ use App\Http\Controllers\BotargaController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\GifDeliveriesController;
 use App\Http\Controllers\ShowController;
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\RentalsController;
@@ -30,7 +31,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('dashboard', ['clients' => Client::take(5)->get()]);
     })->name('dashboard');
 });
 

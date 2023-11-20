@@ -9,4 +9,12 @@ class Rentals extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function client() {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function botarga() {
+        return $this->belongsTo(Botarga::class);
+    }
 }

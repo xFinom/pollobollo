@@ -13,7 +13,7 @@ class RentalsController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin_panel.showAllRentals', ['rentals' => Rentals::with(['client:id,name', 'botarga:id,name'])->get()]);
     }
 
     /**

@@ -2,78 +2,7 @@
     <h2
         class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
     >
-        Estadísticas
-    </h2>
-    <div class="grid gap-6 mb-8 md:grid-cols-2">
-        <!-- Doughnut/Pie chart -->
-        <div
-            class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-        >
-            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Total de Contrataciones
-            </h4>
-            <canvas id="pie"></canvas>
-            <div
-                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
-            >
-                <!-- Chart legend -->
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"
-                    ></span>
-                    <span>Eventos</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"
-                    ></span>
-                    <span>Rentas Botargas</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Entrega Regalos</span>
-                </div>
-            </div>
-        </div>
-        <!-- Lines chart -->
-        <div
-            class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-        >
-            <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Historial de Contrataciones
-            </h4>
-            <canvas id="line"></canvas>
-            <div
-                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
-            >
-                <!-- Chart legend -->
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"
-                    ></span>
-                    <span>Eventos</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"
-                    ></span>
-                    <span>Rentas Botargas</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Entrega Regalos</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <h2
-        class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
-    >
-        Últimos clientes
+        Entrega de Regalos con Botargas
     </h2>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
@@ -82,35 +11,43 @@
                 <tr
                     class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                 >
-                    <th class="px-4 py-3">Nombre</th>
-                    <th class="px-4 py-3">Dirección</th>
-                    <th class="px-4 py-3">Teléfono</th>
-                    <th class="px-4 py-3">Correo Electrónico</th>
+                    <th class="px-4 py-3">Botarga</th>
+                    <th class="px-4 py-3">Cliente</th>
+                    <th class="px-4 py-3">Fecha</th>
+                    <th class="px-4 py-3">Hora</th>
+                    <th class="px-4 py-3">Precio</th>
+                    <th class="px-4 py-3">Cortesía</th>
                     <th class="px-4 py-3">Actions</th>
                 </tr>
                 </thead>
                 <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                 >
-                @foreach($clients as $client)
+                @foreach($deliveries as $delivery)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
-                                <a href="{{ route('client.show', $client->id) }}"><p class="font-semibold">{{$client->name}}</p></a>
+                                <a href="{{ route('gift_deliveries.show', $delivery->id) }}"><p class="font-semibold">{{$delivery->botarga->name}}</p></a>
                             </div>
                         </td>
-                        <td class="px-4 py-3 text-sm">
-                            {{$client->address}}
-                        </td>
                         <td class="px-4 py-3 text-xs">
-                            {{$client->phone}}
+                            {{$delivery->client->name}}
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{$client->email}}
+                            {{$delivery->date}}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{$delivery->time}}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{$delivery->price . ' MXN'}}
+                        </td>
+                        <td class="px-4 py-3 text-sm">
+                            {{$delivery->courtesyGift == 0 ? 'Flores' : 'Globos'}}
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center space-x-4 text-sm">
-                                <a href="{{ route('client.edit', $client->id) }}">
+                                <a href="{{ route('gift_deliveries.edit', $delivery->id) }}">
                                     <button
                                         class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                                         aria-label="Edit"
@@ -128,7 +65,7 @@
                                     </button>
                                 </a>
 
-                                <form action="{{route('client.destroy', $client->id)}}" method="POST">
+                                <form action="{{route('gift_deliveries.destroy', $delivery->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
 
