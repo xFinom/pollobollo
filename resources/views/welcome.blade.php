@@ -131,16 +131,15 @@
 </nav>
 
 <div class="carousel relative container mx-auto" style="max-width:1600px;">
-    <div class="carousel-inner relative overflow-hidden w-full" style=" background-color: #43E1C4">
+    <div class="carousel-inner relative overflow-hidden w-full" style="background-color: #915CC2">
         <!--Slide 1-->
         <input class="carousel-open" type="radio" id="carousel-1" name="carousel" aria-hidden="true" hidden="" checked="checked">
         <div class="carousel-item absolute opacity-0" style="height:50vh;">
-            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: ;">
-
+            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style=" background-repeat: no-repeat; background-image: url('/imagenes/logo_1.png'); background-size:50%;">
                 <div class="container mx-auto">
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                        <p class="text-black text-2xl my-0">SHOW</p>
-                        <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">¡Conócenos!</a>
+                        <p class="text-white text-2xl my-0">SHOW</p>
+                        <a class="text-xl text-white inline-block no-underline border-b border-white leading-relaxed hover:text-yellow-200 hover:border-yellow-400" href="#">¡Conócenos!</a>
                     </div>
                 </div>
 
@@ -152,12 +151,12 @@
         <!--Slide 2-->
         <input class="carousel-open" type="radio" id="carousel-2" name="carousel" aria-hidden="true" hidden="">
         <div class="carousel-item absolute opacity-0 bg-cover bg-right" style="height:50vh;">
-            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style="background-image: ">
+            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style=" background-repeat: no-repeat; background-image: url('/imagenes/logo_2.png'); background-size:50%;">
 
                 <div class="container mx-auto">
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                        <p class="text-black text-2xl my-0">BOTARGAS</p>
-                        <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">¡Agenda la tuya!</a>
+                        <p class="text-white text-2xl my-0">BOTARGAS</p>
+                        <a class="text-xl text-white inline-block no-underline border-b border-white leading-relaxed hover:text-yellow-200 hover:border-yellow-400" href="#">¡Agenda la tuya!</a>
                     </div>
                 </div>
 
@@ -169,12 +168,11 @@
         <!--Slide 3-->
         <input class="carousel-open" type="radio" id="carousel-3" name="carousel" aria-hidden="true" hidden="">
         <div class="carousel-item absolute opacity-0" style="height:50vh;">
-            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-bottom" style="background-image: ">
-
+            <div class="block h-full w-full mx-auto flex pt-6 md:pt-0 md:items-center bg-cover bg-right" style=" background-repeat: no-repeat; background-image: url('/imagenes/logo.png'); background-size:60%;">
                 <div class="container mx-auto">
                     <div class="flex flex-col w-full lg:w-1/2 md:ml-16 items-center md:items-start px-6 tracking-wide">
-                        <p class="text-black text-2xl my-0">PAQUETES</p>
-                        <a class="text-xl inline-block no-underline border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" href="#">¡Personaliza tu evento!</a>
+                        <p class="text-white text-2xl my-0">PAQUETES</p>
+                        <a class="text-xl text-white inline-block no-underline border-b border-white-600 leading-relaxed hover:text-yellow-200 hover:border-yellow-400" href="#">¡Personaliza tu evento!</a>
                     </div>
                 </div>
 
@@ -186,18 +184,32 @@
         <!-- Add additional indicators for each slide-->
         <ol class="carousel-indicators">
             <li class="inline-block mr-3">
-                <label for="carousel-1" class="carousel-bullet cursor-pointer block text-4xl text-purple-600 hover:text-yellow-200">•</label>
+                <label for="carousel-1" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-yellow-200">•</label>
             </li>
             <li class="inline-block mr-3">
-                <label for="carousel-2" class="carousel-bullet cursor-pointer block text-4xl text-purple-600 hover:text-yellow-200">•</label>
+                <label for="carousel-2" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-yellow-200">•</label>
             </li>
             <li class="inline-block mr-3">
-                <label for="carousel-3" class="carousel-bullet cursor-pointer block text-4xl text-purple-600 hover:text-yellow-200">•</label>
+                <label for="carousel-3" class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-yellow-200">•</label>
             </li>
         </ol>
 
     </div>
 </div>
+
+<section class="py-8" style="background-color: #43E1C4">
+    <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12">
+    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+        <a><img class="hover:grow hover:shadow-lg" src="{{asset('imagenes/show.jpg')}}"></a>
+    </div>
+    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+        <a><img class="hover:grow hover:shadow-lg" src="{{asset('imagenes/paquetes.jpg')}}"></a>
+    </div>
+    <div class="w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col">
+        <a><img class="hover:grow hover:shadow-lg" src="{{asset('imagenes/botarga_1.jpg')}}"></a>
+    </div>
+    </div>
+</section>
 
 <footer class="container mx-auto bg-yellow-200 py-0 border-t border-gray-400">
     <div class="container flex px-3 py-8 ">
