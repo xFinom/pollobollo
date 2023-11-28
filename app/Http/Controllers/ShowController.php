@@ -34,6 +34,7 @@ class ShowController extends Controller
             'description' => 'required',
             'duration' => 'required',
             'price' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $show = new Show();
@@ -42,6 +43,9 @@ class ShowController extends Controller
         $show->description = $request->description;
         $show->duration = $request->duration;
         $show->price = $request->price;
+
+        $path = $request->file('image')->store('show', 'public');
+        $show->image = $path;
 
         $show->save();
 

@@ -9,7 +9,13 @@ class Client extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    protected $fillable = [
+        'name', // Add this line
+        'phone',
+        'address',
+        'email',
+        // other attributes...
+    ];
     public function events() {
         return $this->hasMany(Events::class);
     }

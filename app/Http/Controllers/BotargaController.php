@@ -32,6 +32,9 @@ class BotargaController extends Controller
         $request->validate([
             'name' => 'required',
             'stock' => 'required',
+            'rent_price' => 'required',
+            'gift_price' => 'required',
+            'description' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
@@ -39,6 +42,9 @@ class BotargaController extends Controller
 
         $botarga->name = $request->name;
         $botarga->stock = $request->stock;
+        $botarga->rent_price = $request->rent_price;
+        $botarga->gift_price = $request->gift_price;
+        $botarga->description = $request->description;
 
         $path = $request->file('image')->store('botarga', 'public');
         $botarga->image = $path;

@@ -12,62 +12,16 @@
             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                 Total de Contrataciones
             </h4>
-            <canvas id="pie"></canvas>
-            <div
-                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
-            >
-                <!-- Chart legend -->
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"
-                    ></span>
-                    <span>Eventos</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"
-                    ></span>
-                    <span>Rentas Botargas</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Entrega Regalos</span>
-                </div>
-            </div>
+            <canvas id="myChart"></canvas>
         </div>
         <!-- Lines chart -->
         <div
             class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
         >
             <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                Historial de Contrataciones
+                Total de Clientes
             </h4>
-            <canvas id="line"></canvas>
-            <div
-                class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400"
-            >
-                <!-- Chart legend -->
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"
-                    ></span>
-                    <span>Eventos</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"
-                    ></span>
-                    <span>Rentas Botargas</span>
-                </div>
-                <div class="flex items-center">
-                    <span
-                        class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"
-                    ></span>
-                    <span>Entrega Regalos</span>
-                </div>
-            </div>
+            <canvas id="clientsChart"></canvas>
         </div>
     </div>
     <h2
@@ -160,3 +114,29 @@
         </div>
     </div>
 </x-admin-panel>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: @json($chartData),
+            options: {
+                // Add your chart options here
+            },
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('clientsChart').getContext('2d');
+        var clientsChart = new Chart(ctx, {
+            type: 'bar',
+            data: @json($clientsChartData),
+            options: {
+                // Add your chart options here
+            },
+        });
+    });
+</script>
+

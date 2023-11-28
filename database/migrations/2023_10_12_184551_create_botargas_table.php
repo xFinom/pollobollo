@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('stock');
+            $table->integer('rent_price');
+            $table->integer('gift_price');
+            $table->string('description');
             $table->string('image');
         });
     }

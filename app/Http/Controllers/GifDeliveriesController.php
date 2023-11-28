@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewClient;
+use App\Mail\Ticket;
 use App\Models\Client;
 use App\Models\GifDeliveries;
-use Database\Factories\GifDeliveriesFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class GifDeliveriesController extends Controller
 {
@@ -28,39 +30,29 @@ class GifDeliveriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(array $requestData)
     {
-        $request->validate([
-            'botarga_id' => 'required',
-            'price' => 'required|date',
-            'date' => 'required',
-            'time' => 'required',
-            'courtesyGift' => 'required',
-            'name' => 'required',
-            'address_client' => 'required',
-            'phone' => 'required|max:15',
-            'email' => 'required|email',
-        ]);
-
         $client = Client::create([
-            'name' => $request->name,
-            'address' => $request->address_client,
-            'phone' => $request->address,
-            'email' => $request->email,
+            'name' => $requestData['name'],
+            'address' => $requestData['address_client'],
+            'phone' => $requestData['phone'],
+            'email' => $requestData['email'],
         ]);
 
         $gifDeliveries = new GifDeliveries();
 
-        $gifDeliveries->botarga_id = $request->botarga_id;
-        $gifDeliveries->cliente_id = $client->id;
-        $gifDeliveries->date = $request->date;
-        $gifDeliveries->time = $request->time;
-        $gifDeliveries->price = $request->price;
-        $gifDeliveries->courtesyGift = $request->courtesyGift;
+        $gifDeliveries->botarga_id = $requestData['botarga_id'];
+        $gifDeliveries->client_id = $client->id;
+        $gifDeliveries->date = $requestData['date'];
+        $gifDeliveries->time = $requestData['time'];
+        $gifDeliveries->price = $requestData['price'];
+        $gifDeliveries->courtesyGift = $requestData['courtesyGift'];
 
         $gifDeliveries->save();
 
-        return redirect()->route('gift_deliveries.index');
+        Mail::to($requestData['email'])->queue(new Ticket($gifDeliveries->id, 'Entrega de regalos por '.$gifDeliveries->botarga->name, $gifDeliveries->botarga->gift_price));
+
+        Mail::to('admin@pollobollo.com')->queue(new NewClient($client));
     }
 
     /**

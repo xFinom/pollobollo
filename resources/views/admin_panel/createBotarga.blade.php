@@ -29,8 +29,29 @@
             </label>
             <br>
             <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Descripción</span>
+                <textarea
+                    class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                    rows="3"
+                    placeholder="Descripción"
+                    id="description" name="description"
+                >{{old('description')}}
+                </textarea>
+            </label>
+            <br>
+            <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Unidades</span>
                 <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="text" id="stock" name="stock" placeholder="Unidades" value='{{old('stock')}}'>
+            </label>
+            <br>
+            <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Precio Renta</span>
+                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="text" id="rent_price" name="rent_price" placeholder="Unidades" value='{{old('rent_price')}}'>
+            </label>
+            <br>
+            <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Precio Entrega de Regalos</span>
+                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="text" id="gift_price" name="gift_price" placeholder="Unidades" value='{{old('gift_price')}}'>
             </label>
             <br>
             <label class="block text-sm">

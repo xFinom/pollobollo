@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewClient;
+use App\Mail\Ticket;
 use App\Models\Rentals;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RentalsController extends Controller
 {
@@ -27,37 +30,28 @@ class RentalsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(array $requestData)
     {
-        $request->validate([
-            'botarga_id' => 'required',
-            'price' => 'required',
-            'returnDate' => 'required|date',
-            'duration' => 'required',
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required|max:15',
-            'email' => 'required|email',
-        ]);
-
         $client = Client::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'phone' => $request->address,
-            'email' => $request->email,
+            'name' => $requestData['name'],
+            'address' => $requestData['address'],
+            'phone' => $requestData['phone'],
+            'email' => $requestData['email'],''
         ]);
 
         $rentals = new Rentals();
 
-        $rentals->botarga_id = $request->botarga_id;
-        $rentals->cliente_id = $client->id;
-        $rentals->price = $request->price;
-        $rentals->returnDate = $request->returnDate;
-        $rentals->duration = $request->duration;
+        $rentals->botarga_id = $requestData['botarga_id'];
+        $rentals->client_id = $client->id;
+        $rentals->price = $requestData['price'];
+        $rentals->returnDate = $requestData['returnDate'];
+        $rentals->duration = $requestData['duration'];
 
         $rentals->save();
 
-        return redirect()->route('rentals.index');
+        Mail::to($requestData['email'])->queue(new Ticket($rentals->id, 'Renta de '.$rentals->botarga->name, $rentals->price));
+
+        Mail::to('admin@pollobollo.com')->queue(new NewClient($client));
     }
 
     /**
@@ -104,7 +98,6 @@ class RentalsController extends Controller
     public function destroy(Rentals $rentals)
     {
         $rentals->delete();
-
         return redirect()->route('rentals.index');
     }
 }

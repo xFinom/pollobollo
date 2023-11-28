@@ -21,7 +21,7 @@
     <div
         class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
     >
-        <form action="{{ route('show.store') }}" method="POST">
+        <form action="{{ route('show.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Nombre</span>
@@ -41,12 +41,18 @@
             <br>
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Duración</span>
-                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="text" id="duration" name="duration" placeholder="Duración" value='{{old('duration')}}'>
+                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="number" id="duration" name="duration" placeholder="Duración" value='{{old('duration')}}'>
             </label>
             <br>
             <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">Precio</span>
-                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="text" id="price" name="price" placeholder="Precio" value='{{old('price')}}'>
+                <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" type="number" id="price" name="price" placeholder="Precio" value='{{old('price')}}'>
+            </label>
+            <br>
+            <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Imagen</span>
+                <input class=" block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" id="image" name="image" value='{{old('image')}}'>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
             </label>
             <br>
 
